@@ -24,15 +24,10 @@ namespace ConsoleRabbitMq
 
             properties.Persistent = true;
 
-            var input = string.Empty;
-
-            do
+            for (int i = 0; i < 50; i++)
             {
-                input = Console.ReadLine();
-
-                channel.BasicPublish(exchange: "", routingKey: queueName, basicProperties: properties, body: Encoding.UTF8.GetBytes(input));
-
-            } while (input != "exit");
+                channel.BasicPublish(exchange: "", routingKey: queueName, basicProperties: properties, body: Encoding.UTF8.GetBytes(i + "---" +Guid.NewGuid().ToString()));
+            }
         }
     }
 }

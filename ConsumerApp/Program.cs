@@ -21,14 +21,24 @@ namespace ConsumerApp
 
             var consumer = new EventingBasicConsumer(channel);
 
+            //Qos设置在Received里无效
+            //每次只接收一条消息，应答后队列下发另一条
+            channel.BasicQos(0, 1, false);
+
             //接收
-            consumer.Received += (sender, args) => {
-                var tag = args.DeliveryTag;
-                var key = args.RoutingKey;
-                var exchange = args.Exchange;
-                var body = args.Body.ToArray();
+            consumer.Received += (sender, e) => {
+                var tag = e.DeliveryTag;
+                var key = e.RoutingKey;
+                var exchange = e.Exchange;
+                var body = e.Body.ToArray();
                 Console.WriteLine(Encoding.UTF8.GetString(body));
-                channel.BasicAck(args.DeliveryTag, false);
+
+                if (args != null && args.Length > 0)
+                {
+                    System.Threading.Thread.Sleep(TimeSpan.FromSeconds(Convert.ToInt32(args[0])));
+                }
+
+                channel.BasicAck(e.DeliveryTag, false);
             };
 
             //消费
