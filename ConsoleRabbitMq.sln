@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleRabbitMq", "ConsoleRabbitMq\ConsoleRabbitMq.csproj", "{9D44CAF8-26BD-4C04-86D5-ACE0319E29BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleRabbitMq", "ConsoleRabbitMq\ConsoleRabbitMq.csproj", "{9D44CAF8-26BD-4C04-86D5-ACE0319E29BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsumerApp", "ConsumerApp\ConsumerApp.csproj", "{691AA9B1-7032-49D1-AD17-8B108C68E4C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsumerApp", "ConsumerApp\ConsumerApp.csproj", "{691AA9B1-7032-49D1-AD17-8B108C68E4C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNetQ.WebApi", "EasyNetQ.WebApi\EasyNetQ.WebApi.csproj", "{BDF8A3D0-7D01-49BC-9F2C-11115B53C529}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{691AA9B1-7032-49D1-AD17-8B108C68E4C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{691AA9B1-7032-49D1-AD17-8B108C68E4C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{691AA9B1-7032-49D1-AD17-8B108C68E4C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDF8A3D0-7D01-49BC-9F2C-11115B53C529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDF8A3D0-7D01-49BC-9F2C-11115B53C529}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDF8A3D0-7D01-49BC-9F2C-11115B53C529}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDF8A3D0-7D01-49BC-9F2C-11115B53C529}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
