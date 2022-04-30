@@ -15,7 +15,7 @@ namespace ConsumerApp
 
             var channel = connection.CreateModel();
 
-            channel.ExchangeDeclare($"Ex_{nameof(Program.Main)}", ExchangeType.Direct);
+            channel.ExchangeDeclare($"Ex_{nameof(Program.Main)}", ExchangeType.Topic);
 
             var queueName = channel.QueueDeclare().QueueName;
 

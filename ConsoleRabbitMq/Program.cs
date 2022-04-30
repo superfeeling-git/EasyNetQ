@@ -14,7 +14,7 @@ namespace ConsoleRabbitMq
 
             var channel = connection.CreateModel();
 
-            channel.ExchangeDeclare($"Ex_{nameof(Program.Main)}",ExchangeType.Direct);
+            channel.ExchangeDeclare($"Ex_{nameof(Program.Main)}",ExchangeType.Topic);
 
             //Fanout/Direct/Topic模式需要消费者先启动
             //否则如果生产者先启动，会因为没有相应的队列绑定导致消息丢失
