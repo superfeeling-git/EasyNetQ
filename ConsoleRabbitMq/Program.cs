@@ -14,19 +14,11 @@ namespace ConsoleRabbitMq
 
             var channel = connection.CreateModel();
 
-            var queueName = nameof(Program.Main);
-
-            //durable:队列的持久化，autoDelete必须为false
-            channel.QueueDeclare(queue: queueName, durable: false, exclusive: false, autoDelete: false);
-
-            //消息的持久化，否则RabbitMQ重启后只保留队列，不保留消息
-            var properties = channel.CreateBasicProperties();
-
-            properties.Persistent = true;
+            channel.ExchangeDeclare($"Ex_{nameof(Program.Main)}",ExchangeType.Fanout);
 
             for (int i = 0; i < 50; i++)
             {
-                channel.BasicPublish(exchange: "", routingKey: queueName, basicProperties: properties, body: Encoding.UTF8.GetBytes(i + "---" +Guid.NewGuid().ToString()));
+                channel.BasicPublish(exchange: $"Ex_{nameof(Program.Main)}", routingKey: "", basicProperties: null, body: Encoding.UTF8.GetBytes(i + "---" +Guid.NewGuid().ToString()));
             }
         }
     }

@@ -15,9 +15,11 @@ namespace ConsumerApp
 
             var channel = connection.CreateModel();
 
-            var queueName = nameof(Program.Main);
+            channel.ExchangeDeclare($"Ex_{nameof(Program.Main)}", ExchangeType.Fanout);
 
-            channel.QueueDeclare(queue: queueName, durable: false, exclusive: false, autoDelete: false);
+            var queueName = channel.QueueDeclare().QueueName;
+
+            channel.QueueBind(queue: queueName, exchange: $"Ex_{nameof(Program.Main)}", routingKey: "");
 
             var consumer = new EventingBasicConsumer(channel);
 
@@ -43,6 +45,10 @@ namespace ConsumerApp
 
             //消费
             channel.BasicConsume(queueName, false, consumer);
+
+            channel.Close();
+
+            channel.Dispose();
 
             Console.ReadLine();
         }
