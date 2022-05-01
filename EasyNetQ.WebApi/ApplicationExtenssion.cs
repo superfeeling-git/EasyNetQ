@@ -10,6 +10,13 @@ namespace EasyNetQ.WebApi
 {
     public static class ApplicationExtenssion
     {
+        /// <summary>
+        /// 中间件实现
+        /// </summary>
+        /// <param name="appBuilder"></param>
+        /// <param name="subscriptionIdPrefix"></param>
+        /// <param name="assembly"></param>
+        /// <returns></returns>
         public static IApplicationBuilder UseSubscribe(this IApplicationBuilder appBuilder, string subscriptionIdPrefix, Assembly assembly)
         {
             var services = appBuilder.ApplicationServices.CreateScope().ServiceProvider;
@@ -18,6 +25,8 @@ namespace EasyNetQ.WebApi
             lifeTime.ApplicationStarted.Register(() =>
             {
                 var subscriber = new AutoSubscriber(bus, subscriptionIdPrefix);
+                //需要指定AutoSubscriberMessageDispatcher对应的实例
+                //并可以通过构造函数传参，如:IServicesProvider，即:services
                 subscriber.AutoSubscriberMessageDispatcher = new WindsorMessageDispatcher(services);
                 subscriber.Subscribe(new Assembly[] { assembly });
                 subscriber.SubscribeAsync(new Assembly[] { assembly });

@@ -29,7 +29,9 @@ namespace EasyNetQ.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             string rabbitMqConnection = Configuration["RabbitMqConnection"];
+            //注册IBus为单例模式
             services.AddSingleton(RabbitHutch.CreateBus(rabbitMqConnection));
+            //注册IConsume的实现类，EasyNetQ会自动扫描实现该接口的类
             services.AddSingleton<IConsume<MessageDto>,OrderConsumer>();
 
             services.AddControllers();
@@ -55,6 +57,7 @@ namespace EasyNetQ.WebApi
 
             app.UseAuthorization();
 
+            //添加相应的中间件
             app.UseSubscribe("OrderService", Assembly.GetExecutingAssembly());
 
             app.UseEndpoints(endpoints =>
